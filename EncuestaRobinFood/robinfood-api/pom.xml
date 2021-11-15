@@ -11,6 +11,24 @@
 	<name>robinfood-api</name>
 	<description>Capa con servicios Rest que seran expuestos por la aplicacion</description>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.co.cmartin.rf</groupId>
+			<artifactId>robinfood-dto</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.co.cmartin.rf</groupId>
+			<artifactId>robinfood-util</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.co.cmartin.rf</groupId>
+			<artifactId>robinfood-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -24,6 +42,11 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.7.0.1746</version>
 			</plugin>
 		</plugins>
 	</build>

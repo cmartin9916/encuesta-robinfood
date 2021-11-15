@@ -22,7 +22,7 @@ public class EncuestaRobinFoodApplication {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.setProperty("server.servlet.context-path", "/parameta-rest");
+		System.setProperty("server.servlet.context-path", "/robinfood-encuesta-api");
 		
 		SpringApplication.run(EncuestaRobinFoodApplication.class, args);
 	}
