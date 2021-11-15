@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.co.cmartin.rf.exception.DatoInvalidoException;
 import com.co.cmartin.rf.exception.DatoNoEncontradoException;
+import com.co.cmartin.rf.exception.ServiceException;
 import com.co.cmartin.rf.request.PreguntaRequest;
 import com.co.cmartin.rf.response.PreguntaResponse;
 
@@ -48,6 +49,6 @@ public interface PreguntaService {
 	 * @return Datos de pregunta con id interno generado
 	 * @throws SQLException Ocurre si se presenta un error inesperado en la capa de acceso a datos
 	 */
-	public PreguntaResponse guardarPregunta(PreguntaRequest preguntaRequest) throws SQLException, DatoInvalidoException;
+	public PreguntaResponse guardarPregunta(PreguntaRequest preguntaRequest) throws SQLException, DatoInvalidoException, ServiceException;
 	
 }
