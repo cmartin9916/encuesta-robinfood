@@ -10,4 +10,22 @@
 	<artifactId>robinfood-service</artifactId>
 	<name>robinfood-service</name>
 	<description>Capa con logica de negocio de la aplicacion</description>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.co.cmartin.rf</groupId>
+			<artifactId>robinfood-dto</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.co.cmartin.rf</groupId>
+			<artifactId>robinfood-util</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.co.cmartin.rf</groupId>
+			<artifactId>robinfood-repository</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>

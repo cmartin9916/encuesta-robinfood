@@ -10,4 +10,12 @@
 	<artifactId>robinfood-repository</artifactId>
 	<name>robinfood-repository</name>
 	<description>Capa con acceso a datos de la aplicacion</description>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.co.cmartin.rf</groupId>
+			<artifactId>robinfood-dto</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
