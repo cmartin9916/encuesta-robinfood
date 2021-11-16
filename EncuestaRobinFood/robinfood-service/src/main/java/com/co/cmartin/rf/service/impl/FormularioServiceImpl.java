@@ -181,10 +181,7 @@ public class FormularioServiceImpl implements FormularioService {
 		formulario.setDescripcion(formularioRequest.getDescripcion());
 		formulario.setActivo(formularioRequest.isActivo());
 		formulario.setFechaUltimaModificacion(new Date());
-		if (formularioRequest.getPreguntas() != null && !formularioRequest.getPreguntas().isEmpty()) {
-			formulario.setPreguntasFormulario(
-					formularioRequest.getPreguntas().stream().map(this::mapeoIdAEntidadPregunta).collect(Collectors.toList()));
-		}
+		formulario.setPreguntasFormulario(formularioRequest.getPreguntas().stream().map(this::mapeoIdAEntidadPregunta).collect(Collectors.toList()));
 
 		return formulario;
 	}
@@ -203,10 +200,8 @@ public class FormularioServiceImpl implements FormularioService {
 		formularioResponse.setTitulo(formulario.getTitulo());
 		formularioResponse.setDescripcion(formulario.getDescripcion());
 		formularioResponse.setActivo(formulario.isActivo());
-		if (formulario.getPreguntasFormulario() != null && !formulario.getPreguntasFormulario().isEmpty()) {
-			formularioResponse.setPreguntas(
-					formulario.getPreguntasFormulario().stream().map(this::mapeoEntidadPreguntaAPreguntaResponse).collect(Collectors.toList()));
-		}
+		formularioResponse.setPreguntas(
+				formulario.getPreguntasFormulario().stream().map(this::mapeoEntidadPreguntaAPreguntaResponse).collect(Collectors.toList()));
 
 		return formularioResponse;
 	}
