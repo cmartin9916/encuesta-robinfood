@@ -129,10 +129,8 @@ public class PreguntaServiceImpl implements PreguntaService {
 		try {
 			if (preguntaRequest.getTipoPregunta() == TipoPregunta.ABIERTA) {
 				validarInformacionPreguntaAbierta(preguntaRequest);
-			} else if (preguntaRequest.getTipoPregunta() == TipoPregunta.CERRADA) {
-				validarInformacionPreguntaCerrada(preguntaRequest);
 			} else {
-				throw new DatoInvalidoException("El tipo de pregunta: '" + preguntaRequest.getTipoPregunta() + "' es invalido");
+				validarInformacionPreguntaCerrada(preguntaRequest);
 			}
 		} catch (SQLException e) {
 			throw new ServiceException("Error al validar pregunta: " + preguntaRequest.getDescripcion(), e);
