@@ -38,7 +38,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PersonaRestControllerTest {
+class PersonaRestControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 	@MockBean

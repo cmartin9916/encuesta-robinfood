@@ -7,6 +7,7 @@ package com.co.cmartin.rf.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -56,4 +57,31 @@ public class Pregunta {
 	@ManyToMany
 	@JoinTable(name = "detalle_pregunta_opcion", joinColumns = @JoinColumn(name = "pregunta_id"), inverseJoinColumns = @JoinColumn(name = "opcion_id"))
 	List<Opcion> opcionesPregunta;
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 * @autor Carlos Martin
+	 * @version 0.0.1 16/11/2021
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pregunta other = (Pregunta) obj;
+		return Objects.equals(descripcion, other.descripcion) && Objects.equals(formularios, other.formularios) && Objects.equals(id, other.id)
+				&& Objects.equals(opcionesPregunta, other.opcionesPregunta) && Objects.equals(respuestas, other.respuestas)
+				&& tipoPregunta == other.tipoPregunta;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 * @autor Carlos Martin
+	 * @version 0.0.1 16/11/2021
+	 */
+	@Override
+	public int hashCode() {
+		return Objects.hash(descripcion, formularios, id, opcionesPregunta, respuestas, tipoPregunta);
+	}
 }
