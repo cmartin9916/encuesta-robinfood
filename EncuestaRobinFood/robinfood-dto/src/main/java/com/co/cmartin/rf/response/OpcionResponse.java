@@ -20,7 +20,6 @@ import lombok.Data;
 public class OpcionResponse {
 	@ApiModelProperty(value = "Id Interno", name = "id", dataType = "Long")
 	private Long id;
-	@NotBlank(message = "El campo descripción es obligatorio")
 	@ApiModelProperty(value = "descripción", name = "descripcion", dataType = "String")
 	private String descripcion;
 }

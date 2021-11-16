@@ -163,7 +163,7 @@ public class PreguntaServiceImpl implements PreguntaService {
 	 */
 	private void validarInformacionPreguntaCerrada(PreguntaRequest preguntaRequest) throws DatoInvalidoException, SQLException {
 		Utils.validarListaObligatoria(preguntaRequest.getOpciones(), "opciones de pregunta");
-		
+
 		for (Long opcion : preguntaRequest.getOpciones()) {
 			try {
 				getOpcionService().consultarOpcion(opcion);
@@ -178,8 +178,9 @@ public class PreguntaServiceImpl implements PreguntaService {
 	 * 
 	 * @author Carlos Martin
 	 * @version 0.0.1 15/11/2021
-	 * @param identificacion Identificacion
-	 * @return Informacion de la persona
+	 * @param descripcion  descripcion
+	 * @param tipoPregunta tipo de pregunta
+	 * @return Informacion de la pregunta
 	 * @throws SQLException Ocurre si se presenta una excepcion no controlado al momento de acceder a la capa de datos
 	 */
 	private Pregunta buscarPreguntaPorDescripcionTipo(String descripcion, TipoPregunta tipoPregunta) {
@@ -187,13 +188,13 @@ public class PreguntaServiceImpl implements PreguntaService {
 	}
 
 	/**
-	 * Metodo que mapea la informacion de OpcionRequest a Opcion
+	 * Metodo que mapea la informacion de PreguntaRequest a Pregunta
 	 * 
 	 * @author Carlos Martin
 	 * @version 0.0.1 15/11/2021
-	 * @param id            Id de la opcion en caso tal de ya estar registrada
-	 * @param opcionRequest Informacion de entrada de Opcion
-	 * @return Entidad Opcion
+	 * @param id              Id de la pregunta en caso tal de ya estar registrada
+	 * @param preguntaRequest Informacion de entrada de Pregunta
+	 * @return Entidad Pregunta
 	 */
 	private Pregunta mapeoPreguntaRequestAEntidadPregunta(Long id, PreguntaRequest preguntaRequest) {
 		Pregunta pregunta = new Pregunta();
