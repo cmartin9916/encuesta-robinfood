@@ -93,10 +93,11 @@ public class EncuestaServiceImpl implements EncuestaService {
 	 * @version 0.0.1 15/11/2021
 	 */
 	@Override
-	public void guardarEncuesta(EncuestaRequest encuestaRequest) throws SQLException, DatoNoEncontradoException, DatoInvalidoException, ServiceException {		
-		Utils.validarListaObligatoria(encuestaRequest.getPreguntas(), "preguntas");		
+	public void guardarEncuesta(EncuestaRequest encuestaRequest)
+			throws SQLException, DatoNoEncontradoException, DatoInvalidoException, ServiceException {
+		Utils.validarListaObligatoria(encuestaRequest.getPreguntas(), "preguntas");
 		validarInformacionFormulario(encuestaRequest);
-		
+
 		PersonaResponse persona = null;
 
 		if (encuestaRequest.getDatosPersona() != null) {
@@ -114,14 +115,17 @@ public class EncuestaServiceImpl implements EncuestaService {
 	 * @author Carlos Martin
 	 * @version 0.0.1 15/11/2021
 	 * @param encuestaRequest
-	 * @return
+	 * @return Encuesta
 	 * @throws SQLException
 	 */
-	private Encuesta crearEncuesta(EncuestaRequest encuestaRequest, PersonaResponse personaResponse) {
+	private Encuesta crearEncuesta(EncuestaRequest encuestaRequest, PersonaResponse personaResponse) throws SQLException {
+		try {
+			Encuesta encuesta = mapeoEncuestaRequestAEntidadFormulario(encuestaRequest, personaResponse);
 
-		Encuesta encuesta = mapeoEncuestaRequestAEntidadFormulario(encuestaRequest, personaResponse);
-
-		return getEncuestaRepository().save(encuesta);
+			return getEncuestaRepository().save(encuesta);
+		} catch (Exception e) {
+			throw new SQLException("Error al guardar informacion de la encuesta para el formulario: " + encuestaRequest.getIdFormulario(), e);
+		}
 	}
 
 	private Encuesta mapeoEncuestaRequestAEntidadFormulario(EncuestaRequest encuestaRequest, PersonaResponse personaResponse) {
@@ -153,11 +157,8 @@ public class EncuestaServiceImpl implements EncuestaService {
 		encuestaResponse.setIdFormulario(formulario.getId());
 		encuestaResponse.setTitulo(formulario.getTitulo());
 		encuestaResponse.setDescripcion(formulario.getDescripcion());
-
-		if (formulario.getPreguntasFormulario() != null && !formulario.getPreguntasFormulario().isEmpty()) {
-			encuestaResponse.setPreguntas(formulario.getPreguntasFormulario().stream().map(this::mapeoEntidadPreguntaAEncuestaPreguntaResponse)
-					.collect(Collectors.toList()));
-		}
+		encuestaResponse.setPreguntas(
+				formulario.getPreguntasFormulario().stream().map(this::mapeoEntidadPreguntaAEncuestaPreguntaResponse).collect(Collectors.toList()));
 
 		return encuestaResponse;
 	}
@@ -179,10 +180,8 @@ public class EncuestaServiceImpl implements EncuestaService {
 		if (pregunta.getTipoPregunta() == TipoPregunta.ABIERTA) {
 			preguntaResponse.setRespuestaAbierta("");
 		} else {
-			if (pregunta.getOpcionesPregunta() != null && !pregunta.getOpcionesPregunta().isEmpty()) {
-				preguntaResponse.setRespuestas(
-						pregunta.getOpcionesPregunta().stream().map(this::mapeoEntidadOpcionAEncuestaOpcionResponse).collect(Collectors.toList()));
-			}
+			preguntaResponse.setRespuestas(
+					pregunta.getOpcionesPregunta().stream().map(this::mapeoEntidadOpcionAEncuestaOpcionResponse).collect(Collectors.toList()));
 		}
 
 		return preguntaResponse;
@@ -233,16 +232,14 @@ public class EncuestaServiceImpl implements EncuestaService {
 			if (preguntaRequest.getRespuestaAbierta() == null || preguntaRequest.getRespuestaAbierta().isEmpty()) {
 				throw new DatoInvalidoException("La pregunta: " + preguntaRequest.getDescripcion() + ", no tiene respuesta");
 			}
-		} else if (preguntaRequest.getTipoPregunta() == TipoPregunta.CERRADA) {
+		} else {
 			Utils.validarListaObligatoria(preguntaRequest.getRespuestas(), "respuestas de pregunta: " + preguntaRequest.getDescripcion());
-			
+
 			Optional<EncuestaOpcionRequest> opcion = preguntaRequest.getRespuestas().stream().filter(EncuestaOpcionRequest::isSeleccionada)
 					.findFirst();
 			if (!opcion.isPresent()) {
 				throw new DatoInvalidoException("No se encontro respuesta seleccionada para la pregunta: " + preguntaRequest.getDescripcion());
 			}
-		} else {
-			throw new DatoInvalidoException("El tipo de pregunta: '" + preguntaRequest.getTipoPregunta() + "' es invalido");
 		}
 	}
 }

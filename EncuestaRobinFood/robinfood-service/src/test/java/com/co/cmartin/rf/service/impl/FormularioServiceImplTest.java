@@ -32,7 +32,6 @@ import com.co.cmartin.rf.exception.SQLException;
 import com.co.cmartin.rf.exception.ServiceException;
 import com.co.cmartin.rf.repository.FormularioRepository;
 import com.co.cmartin.rf.request.FormularioRequest;
-import com.co.cmartin.rf.request.FormularioRequestEstado;
 import com.co.cmartin.rf.response.FormularioResponse;
 import com.co.cmartin.rf.response.PreguntaResponse;
 import com.co.cmartin.rf.service.PreguntaService;

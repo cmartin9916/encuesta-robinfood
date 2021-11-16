@@ -45,7 +45,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-public class FormularioRestControllerTest {
+class FormularioRestControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 	@MockBean
