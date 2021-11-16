@@ -7,6 +7,7 @@ package com.co.cmartin.rf.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,4 +46,32 @@ public class Persona {
 	private Date fechaUltimaModificacion;
 	@OneToMany(mappedBy="persona")
     private List<Encuesta> encuestas;
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 * @autor Carlos Martin
+	 * @version 0.0.1 15/11/2021
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Persona other = (Persona) obj;
+		return Objects.equals(apellidos, other.apellidos) && Objects.equals(correoElectronico, other.correoElectronico)
+				&& Objects.equals(encuestas, other.encuestas) && Objects.equals(id, other.id) && Objects.equals(identificacion, other.identificacion)
+				&& Objects.equals(nombres, other.nombres);
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 * @autor Carlos Martin
+	 * @version 0.0.1 15/11/2021
+	 */
+	@Override
+	public int hashCode() {
+		return Objects.hash(apellidos, correoElectronico, encuestas, id, identificacion, nombres);
+	}
+	
 }
