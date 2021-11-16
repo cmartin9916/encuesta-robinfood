@@ -7,8 +7,6 @@ package com.co.cmartin.rf.response;
 
 import java.util.List;
 
-import javax.validation.constraints.NotBlank;
-
 import com.co.cmartin.rf.enums.TipoPregunta;
 
 import io.swagger.annotations.ApiModelProperty;

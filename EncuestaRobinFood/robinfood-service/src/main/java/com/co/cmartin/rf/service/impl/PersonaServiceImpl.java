@@ -5,7 +5,6 @@
  */
 package com.co.cmartin.rf.service.impl;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.co.cmartin.rf.entity.Persona;
 import com.co.cmartin.rf.exception.DatoNoEncontradoException;
+import com.co.cmartin.rf.exception.SQLException;
 import com.co.cmartin.rf.repository.PersonaRepository;
 import com.co.cmartin.rf.request.PersonaRequest;
 import com.co.cmartin.rf.response.PersonaResponse;

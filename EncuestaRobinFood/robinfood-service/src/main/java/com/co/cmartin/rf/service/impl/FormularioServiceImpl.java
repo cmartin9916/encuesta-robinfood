@@ -5,13 +5,11 @@
  */
 package com.co.cmartin.rf.service.impl;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.PersistenceException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -21,6 +19,7 @@ import com.co.cmartin.rf.entity.Formulario;
 import com.co.cmartin.rf.entity.Pregunta;
 import com.co.cmartin.rf.exception.DatoInvalidoException;
 import com.co.cmartin.rf.exception.DatoNoEncontradoException;
+import com.co.cmartin.rf.exception.SQLException;
 import com.co.cmartin.rf.exception.ServiceException;
 import com.co.cmartin.rf.repository.FormularioRepository;
 import com.co.cmartin.rf.request.FormularioRequest;

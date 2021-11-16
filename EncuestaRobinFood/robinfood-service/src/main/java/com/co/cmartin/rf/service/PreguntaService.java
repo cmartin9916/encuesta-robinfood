@@ -5,11 +5,11 @@
  */
 package com.co.cmartin.rf.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.co.cmartin.rf.exception.DatoInvalidoException;
 import com.co.cmartin.rf.exception.DatoNoEncontradoException;
+import com.co.cmartin.rf.exception.SQLException;
 import com.co.cmartin.rf.exception.ServiceException;
 import com.co.cmartin.rf.request.PreguntaRequest;
 import com.co.cmartin.rf.response.PreguntaResponse;

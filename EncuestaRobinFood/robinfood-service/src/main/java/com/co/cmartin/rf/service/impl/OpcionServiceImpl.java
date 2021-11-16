@@ -5,7 +5,6 @@
  */
 package com.co.cmartin.rf.service.impl;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.co.cmartin.rf.entity.Opcion;
 import com.co.cmartin.rf.exception.DatoInvalidoException;
 import com.co.cmartin.rf.exception.DatoNoEncontradoException;
+import com.co.cmartin.rf.exception.SQLException;
 import com.co.cmartin.rf.repository.OpcionRepository;
 import com.co.cmartin.rf.request.OpcionRequest;
 import com.co.cmartin.rf.response.OpcionResponse;

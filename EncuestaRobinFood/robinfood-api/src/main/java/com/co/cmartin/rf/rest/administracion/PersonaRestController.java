@@ -5,7 +5,6 @@
  */
 package com.co.cmartin.rf.rest.administracion;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.co.cmartin.rf.exception.DatoNoEncontradoException;
+import com.co.cmartin.rf.exception.SQLException;
 import com.co.cmartin.rf.exception.ServiceException;
 import com.co.cmartin.rf.request.PersonaRequest;
 import com.co.cmartin.rf.response.PersonaResponse;

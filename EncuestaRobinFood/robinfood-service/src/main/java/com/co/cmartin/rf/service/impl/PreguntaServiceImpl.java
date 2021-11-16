@@ -5,7 +5,6 @@
  */
 package com.co.cmartin.rf.service.impl;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +20,7 @@ import com.co.cmartin.rf.entity.Pregunta;
 import com.co.cmartin.rf.enums.TipoPregunta;
 import com.co.cmartin.rf.exception.DatoInvalidoException;
 import com.co.cmartin.rf.exception.DatoNoEncontradoException;
+import com.co.cmartin.rf.exception.SQLException;
 import com.co.cmartin.rf.exception.ServiceException;
 import com.co.cmartin.rf.repository.PreguntaRepository;
 import com.co.cmartin.rf.request.PreguntaRequest;
