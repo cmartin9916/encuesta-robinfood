@@ -58,16 +58,17 @@ public class PreguntaServiceImpl implements PreguntaService {
 	 */
 	@Override
 	public List<PreguntaResponse> listarPreguntas() throws SQLException, DatoNoEncontradoException {
+		List<Pregunta> pregunta;
 		try {
-			List<Pregunta> pregunta = getPreguntaRepository().findAll();
-
-			if (!pregunta.isEmpty()) {
-				return pregunta.stream().map(this::mapeoEntidadPreguntaAPreguntaResponse).collect(Collectors.toList());
-			} else {
-				throw new DatoNoEncontradoException("No se encontro informacion de preguntas");
-			}
+			pregunta = getPreguntaRepository().findAll();
 		} catch (Exception e) {
 			throw new SQLException("Error al consultar informacion de las preguntas", e);
+		}
+		
+		if (!pregunta.isEmpty()) {
+			return pregunta.stream().map(this::mapeoEntidadPreguntaAPreguntaResponse).collect(Collectors.toList());
+		} else {
+			throw new DatoNoEncontradoException("No se encontro informacion de preguntas");
 		}
 	}
 

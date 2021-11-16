@@ -35,33 +35,35 @@ import lombok.Getter;
  */
 @Service
 public class OpcionServiceImpl implements OpcionService {
-	
+
 	@Autowired
 	@Getter
 	private OpcionRepository opcionRepository;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.co.cmartin.rf.service.OpcionService#listarOpciones()
 	 * @autor Carlos Martin
 	 * @version 0.0.1 15/11/2021
 	 */
 	@Override
 	public List<OpcionResponse> listarOpciones() throws SQLException, DatoNoEncontradoException {
+		List<Opcion> opciones;
 		try {
-			List<Opcion> opciones = getOpcionRepository().findAll();
-		
-			if(!opciones.isEmpty()) {				
-				return opciones.stream().map(this::mapeoEntidadOpcionAOpcionResponse)
-						.collect(Collectors.toList());				
-			} else {
-				throw new DatoNoEncontradoException("No se encontro informacion de opciones");
-			}
+			opciones = getOpcionRepository().findAll();
 		} catch (Exception e) {
 			throw new SQLException("Error al consultar informacion de las opciones", e);
 		}
+
+		if (!opciones.isEmpty()) {
+			return opciones.stream().map(this::mapeoEntidadOpcionAOpcionResponse).collect(Collectors.toList());
+		} else {
+			throw new DatoNoEncontradoException("No se encontro informacion de opciones");
+		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.co.cmartin.rf.service.OpcionService#consultarOpcion(java.lang.Long)
 	 * @autor Carlos Martin
 	 * @version 0.0.1 15/11/2021
@@ -70,7 +72,7 @@ public class OpcionServiceImpl implements OpcionService {
 	public OpcionResponse consultarOpcion(Long id) throws SQLException, DatoNoEncontradoException {
 		try {
 			Opcion opcion = getOpcionRepository().getById(id);
-			
+
 			return mapeoEntidadOpcionAOpcionResponse(opcion);
 		} catch (EntityNotFoundException e) {
 			throw new DatoNoEncontradoException("No se encontro informacion asociada a la opcion: " + id, e);
@@ -79,7 +81,8 @@ public class OpcionServiceImpl implements OpcionService {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.co.cmartin.rf.service.OpcionService#guardarOpcion(com.co.cmartin.rf.request.OpcionRequest)
 	 * @autor Carlos Martin
 	 * @version 0.0.1 15/11/2021
@@ -88,7 +91,7 @@ public class OpcionServiceImpl implements OpcionService {
 	public OpcionResponse guardarOpcion(OpcionRequest opcionRequest) throws SQLException, DatoInvalidoException {
 		try {
 			Opcion respuesta = getOpcionRepository().save(mapeoOpcionRequestAEntidadOpcion(opcionRequest));
-			
+
 			return mapeoEntidadOpcionAOpcionResponse(respuesta);
 		} catch (DataIntegrityViolationException e) {
 			throw new DatoInvalidoException("La opcion: '" + opcionRequest.getDescripcion() + "' ya se encuentra registrada", e);
@@ -96,12 +99,13 @@ public class OpcionServiceImpl implements OpcionService {
 			throw new SQLException("Error al registrar opcion: " + opcionRequest.getDescripcion(), e);
 		}
 	}
-	
+
 	/**
 	 * Metodo que mapea la informacion de OpcionRequest a Opcion
+	 * 
 	 * @author Carlos Martin
 	 * @version 0.0.1 15/11/2021
-	 * @param id Id de la opcion en caso tal de ya estar registrada
+	 * @param id            Id de la opcion en caso tal de ya estar registrada
 	 * @param opcionRequest Informacion de entrada de Opcion
 	 * @return Entidad Opcion
 	 */
@@ -109,12 +113,13 @@ public class OpcionServiceImpl implements OpcionService {
 		Opcion opcion = new Opcion();
 		opcion.setDescripcion(opcionRequest.getDescripcion());
 		opcion.setFechaUltimaModificacion(new Date());
-		
+
 		return opcion;
 	}
-	
+
 	/**
 	 * Metodo que mapea la informacion de Opcion a OpcionResponse
+	 * 
 	 * @author Carlos Martin
 	 * @version 0.0.1 15/11/2021
 	 * @param opcion Entidad Opcion
@@ -124,7 +129,7 @@ public class OpcionServiceImpl implements OpcionService {
 		OpcionResponse opcionResponse = new OpcionResponse();
 		opcionResponse.setId(opcion.getId());
 		opcionResponse.setDescripcion(opcion.getDescripcion());
-		
+
 		return opcionResponse;
 	}
 

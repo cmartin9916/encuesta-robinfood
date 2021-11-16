@@ -38,28 +38,30 @@ public class PersonaServiceImpl implements PersonaService {
 	@Getter
 	private PersonaRepository personaRepository;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.co.cmartin.rf.service.PersonaService#listarPersonas()
 	 * @autor Carlos Martin
 	 * @version 0.0.1 15/11/2021
 	 */
 	@Override
 	public List<PersonaResponse> listarPersonas() throws SQLException, DatoNoEncontradoException {
+		List<Persona> personas;
 		try {
-			List<Persona> personas = getPersonaRepository().findAll();
-		
-			if(!personas.isEmpty()) {				
-				return personas.stream().map(this::mapeoEntidadPersonaAPersonaResponse)
-						.collect(Collectors.toList());				
-			} else {
-				throw new DatoNoEncontradoException("No se encontro informacion de personas");
-			}
+			personas = getPersonaRepository().findAll();
 		} catch (Exception e) {
 			throw new SQLException("Error al consultar informacion de las personas", e);
 		}
+
+		if (!personas.isEmpty()) {
+			return personas.stream().map(this::mapeoEntidadPersonaAPersonaResponse).collect(Collectors.toList());
+		} else {
+			throw new DatoNoEncontradoException("No se encontro informacion de personas");
+		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.co.cmartin.rf.service.PersonaService#consultarPersona(java.lang.Long)
 	 * @autor Carlos Martin
 	 * @version 0.0.1 15/11/2021
@@ -68,7 +70,7 @@ public class PersonaServiceImpl implements PersonaService {
 	public PersonaResponse consultarPersona(Long id) throws SQLException, DatoNoEncontradoException {
 		try {
 			Persona persona = getPersonaRepository().getById(id);
-			
+
 			return mapeoEntidadPersonaAPersonaResponse(persona);
 		} catch (EntityNotFoundException e) {
 			throw new DatoNoEncontradoException("No se encontro informacion asociada a la persona: " + id, e);
@@ -85,9 +87,10 @@ public class PersonaServiceImpl implements PersonaService {
 	 */
 	@Override
 	public PersonaResponse guardarPersona(PersonaRequest personaRequest) throws SQLException {
-		Persona persona = buscarPersonaPorIdentificacion(personaRequest.getIdentificacion());				
+		Persona persona = buscarPersonaPorIdentificacion(personaRequest.getIdentificacion());
 		try {
-			Persona respuesta = getPersonaRepository().save(mapeoPersonaRequestAEntidadPersona(persona == null ? null : persona.getId(), personaRequest));
+			Persona respuesta = getPersonaRepository()
+					.save(mapeoPersonaRequestAEntidadPersona(persona == null ? null : persona.getId(), personaRequest));
 			return mapeoEntidadPersonaAPersonaResponse(respuesta);
 		} catch (Exception e) {
 			throw new SQLException("Error al guardar informacion de la persona: " + personaRequest.getIdentificacion(), e);
@@ -96,6 +99,7 @@ public class PersonaServiceImpl implements PersonaService {
 
 	/**
 	 * Metodo que busca informacion de persona por identificacion
+	 * 
 	 * @author Carlos Martin
 	 * @version 0.0.1 15/11/2021
 	 * @param identificacion Identificacion
@@ -112,9 +116,10 @@ public class PersonaServiceImpl implements PersonaService {
 
 	/**
 	 * Metodo que mapea la informacion de PersonaRequest a Persona
+	 * 
 	 * @author Carlos Martin
 	 * @version 0.0.1 15/11/2021
-	 * @param id Id de la persona en caso tal de ya estar registrada
+	 * @param id             Id de la persona en caso tal de ya estar registrada
 	 * @param personaRequest Informacion de entrada de Persona
 	 * @return Entidad Persona
 	 */
@@ -130,9 +135,10 @@ public class PersonaServiceImpl implements PersonaService {
 		}
 		return persona;
 	}
-	
+
 	/**
 	 * Metodo que mapea la informacion de Persona a PersonaResponse
+	 * 
 	 * @author Carlos Martin
 	 * @version 0.0.1 15/11/2021
 	 * @param persona Entidad Persona
@@ -145,7 +151,7 @@ public class PersonaServiceImpl implements PersonaService {
 		personaResponse.setNombres(persona.getNombres());
 		personaResponse.setApellidos(persona.getApellidos());
 		personaResponse.setCorreoElectronico(persona.getCorreoElectronico());
-		
+
 		return personaResponse;
 	}
 }

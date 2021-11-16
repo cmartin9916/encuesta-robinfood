@@ -57,16 +57,17 @@ public class FormularioServiceImpl implements FormularioService {
 	 */
 	@Override
 	public List<FormularioResponse> listarFormularios() throws SQLException, DatoNoEncontradoException {
+		List<Formulario> formulario;
 		try {
-			List<Formulario> formulario = getFormularioRepository().findAll();
-
-			if (!formulario.isEmpty()) {
-				return formulario.stream().map(this::mapeoEntidadFormularioAFormularioResponse).collect(Collectors.toList());
-			} else {
-				throw new DatoNoEncontradoException("No se encontro informacion de formularios");
-			}
+			formulario = getFormularioRepository().findAll();
 		} catch (Exception e) {
 			throw new SQLException("Error al consultar informacion de las formularios", e);
+		}
+
+		if (!formulario.isEmpty()) {
+			return formulario.stream().map(this::mapeoEntidadFormularioAFormularioResponse).collect(Collectors.toList());
+		} else {
+			throw new DatoNoEncontradoException("No se encontro informacion de formularios");
 		}
 	}
 
